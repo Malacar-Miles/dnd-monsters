@@ -14,7 +14,7 @@ const initialState: UsersState = {
   currentUser: null,
 };
 
-type NewUserCredentials = {
+type UserCredentials = {
   name: string;
   password: string;
 };
@@ -23,10 +23,10 @@ export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    create: (state, action: PayloadAction<NewUserCredentials>) => {
+    create: (state, action: PayloadAction<UserCredentials>) => {
       const newUserCredentials = action.payload;
       const userId = newUserCredentials.name.toLowerCase();
-      if (state.allUsers[userId])
+      if (state.allUsers[userId]) // Placeholder implementation
         throw new Error(
           `Attempting to create user "${userId}" that already exists.`
         );
@@ -34,12 +34,15 @@ export const usersSlice = createSlice({
       state.allUsers[userId] = newUser;
     },
 
-    signIn: (state, action: PayloadAction<string>) => {
-      const userName = action.payload;
-      const userId = userName.toLowerCase();
-      if (!state.allUsers[userId]) throw new Error(
-        `Attempting to log in as a user "${userId}" that doesn't exist.`
-      );
+    signIn: (state, action: PayloadAction<UserCredentials>) => {
+      const { name, password } = action.payload;
+      const userId = name.toLowerCase();
+      if (!state.allUsers[userId]) // Placeholder implementation
+        throw new Error(
+          `Attempting to log in as a user "${userId}" that doesn't exist.`
+        );
+      if (state.allUsers[userId].password !== password) // Placeholder implementation
+        throw new Error(`Incorrect password. Expected "${state.allUsers[userId].password}", got "${password}"`);
       state.currentUser = userId;
     },
 

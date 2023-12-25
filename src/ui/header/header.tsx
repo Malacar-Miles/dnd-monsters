@@ -1,6 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
 import { AppBar, Typography, Stack, Button } from "@mui/material";
-import PageContentContainer from "../components/page-content-container";
 
 const Header = () => {
   const noDecoration = {
@@ -26,11 +25,7 @@ const Header = () => {
             </Link>
           </Typography>
 
-          <Stack
-            direction="row"
-            gap="1rem"
-            alignItems="center"
-          >
+          <Stack direction="row" gap="1rem" alignItems="center">
             <Button color="inherit" size="large" variant="outlined">
               <Link to="/sign-up" style={noDecoration}>
                 Sign Up
@@ -46,9 +41,7 @@ const Header = () => {
         </Stack>
       </AppBar>
 
-      <PageContentContainer>
-        <Outlet />
-      </PageContentContainer>
+      <Outlet />
     </>
   );
 };
