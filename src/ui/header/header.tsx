@@ -13,7 +13,7 @@ const Header = () => {
       <AppBar
         component="nav"
         position="static"
-        sx={{ marginTop: "0.5rem", marginBottom: "0.5rem", padding: "0.5rem 1rem" }}
+        sx={{ margin: "0.5rem 0", padding: "0.5rem 1rem" }}
       >
         <Stack
           direction="row"
