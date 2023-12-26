@@ -26,7 +26,8 @@ export const usersSlice = createSlice({
     create: (state, action: PayloadAction<UserCredentials>) => {
       const newUserCredentials = action.payload;
       const userId = newUserCredentials.name.toLowerCase();
-      if (state.allUsers[userId]) // Placeholder implementation
+      if (state.allUsers[userId])
+        // Placeholder implementation
         throw new Error(
           `Attempting to create user "${userId}" that already exists.`
         );
@@ -37,12 +38,16 @@ export const usersSlice = createSlice({
     signIn: (state, action: PayloadAction<UserCredentials>) => {
       const { name, password } = action.payload;
       const userId = name.toLowerCase();
-      if (!state.allUsers[userId]) // Placeholder implementation
+      if (!state.allUsers[userId])
+        // Placeholder implementation
         throw new Error(
           `Attempting to log in as a user "${userId}" that doesn't exist.`
         );
-      if (state.allUsers[userId].password !== password) // Placeholder implementation
-        throw new Error(`Incorrect password. Expected "${state.allUsers[userId].password}", got "${password}"`);
+      if (state.allUsers[userId].password !== password)
+        // Placeholder implementation
+        throw new Error(
+          `Incorrect password. Expected "${state.allUsers[userId].password}", got "${password}"`
+        );
       state.currentUser = userId;
     },
 
@@ -50,7 +55,7 @@ export const usersSlice = createSlice({
       state.currentUser = null;
     },
 
-    eraseAllData: () => initialState,
+    eraseAllData: () => initialState, // For debugging only
   },
 });
 
