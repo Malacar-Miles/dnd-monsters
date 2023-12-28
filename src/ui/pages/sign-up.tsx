@@ -2,10 +2,10 @@ import { Box, TextField, Button, Stack, Typography } from "@mui/material";
 import PageContentContainer from "../components/page-content-container";
 import { useState } from "react";
 import { useValidateSignUpForm } from "../../model/form-validation-hooks";
-import useReduxInterface from "../../model/redux-interface-hook";
+import { useReduxUserActions } from "../../model/redux-slice-users";
 
 const SignUpPage = () => {
-  const { createUser, signInUser } = useReduxInterface();
+  const { createUser, signInUser } = useReduxUserActions();
 
   const [formUserName, setFormUserName] = useState("");
   const [formPassword, setFormPassword] = useState("");
@@ -44,7 +44,11 @@ const SignUpPage = () => {
   return (
     <PageContentContainer>
       <Box component="form">
-        <Typography variant="h2" textAlign="center" sx={{ marginBottom: "1rem"}}>
+        <Typography
+          variant="h2"
+          textAlign="center"
+          sx={{ marginBottom: "1rem" }}
+        >
           Create New Account
         </Typography>
         <Stack alignItems="center" gap="1rem">

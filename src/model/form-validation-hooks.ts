@@ -1,24 +1,24 @@
-import useReduxInterface from "./redux-interface-hook";
+import { selectUserData } from "./redux-slice-users";
+import { useSelector } from "react-redux";
 
 export const useValidateSignUpForm = () => {
-  const { allUsers } = useReduxInterface();
+  const { allUsers } = useSelector(selectUserData);
 
   const validateUserName = (input: string) => {
-    const trimmedInput = input.trim();
+    const processedInput = input.trim().toLowerCase();
 
-    if (trimmedInput.length < 3)
+    if (processedInput.length < 3)
       return { isValid: false, message: "Should be at least 3 characters" };
 
     // eslint-disable-next-line
     const regex = /^[A-Za-z0-9\s\-]+$/;
-    if (!regex.test(trimmedInput))
+    if (!regex.test(processedInput))
       return {
         isValid: false,
-        message:
-          "No foreign or special characters",
+        message: "No foreign or special characters",
       };
 
-    if (allUsers[trimmedInput])
+    if (allUsers[processedInput])
       return { isValid: false, message: "This user name is not available" };
 
     return { isValid: true, message: "This user name is valid" };

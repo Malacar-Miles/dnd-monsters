@@ -3,15 +3,16 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./redux-store";
 import type { User, UserDataStorage } from "./data";
 import { blankUser } from "./data";
+import { useDispatch } from "react-redux";
 
 type UsersState = {
   allUsers: UserDataStorage;
-  currentUser: string | null;
+  currentUserId: string | null;
 };
 
 const initialState: UsersState = {
   allUsers: {},
-  currentUser: null,
+  currentUserId: null,
 };
 
 type UserCredentials = {
@@ -48,11 +49,11 @@ export const usersSlice = createSlice({
         throw new Error(
           `Incorrect password. Expected "${state.allUsers[userId].password}", got "${password}"`
         );
-      state.currentUser = userId;
+      state.currentUserId = userId;
     },
 
     signOut: (state) => {
-      state.currentUser = null;
+      state.currentUserId = null;
     },
 
     eraseAllData: () => initialState, // For debugging only
@@ -61,6 +62,24 @@ export const usersSlice = createSlice({
 
 export const { create, signIn, signOut, eraseAllData } = usersSlice.actions;
 
-export const selectUsers = (state: RootState) => state.users;
+export const selectUserData = (state: RootState) => state.users;
+
+export const useReduxUserActions = () => {
+  const dispatch = useDispatch();
+
+  const createUser = (name: string, password: string) => {
+    dispatch(create({ name, password }));
+  };
+
+  const signInUser = (name: string, password: string) => {
+    dispatch(signIn({ name, password }));
+  };
+
+  const signOutUser = () => {
+    dispatch(signOut());
+  };
+
+  return { createUser, signInUser, signOutUser };
+};
 
 export default usersSlice.reducer;
