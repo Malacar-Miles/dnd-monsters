@@ -1,10 +1,47 @@
 import { Outlet, Link } from "react-router-dom";
 import { AppBar, Typography, Stack, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import {
+  selectUserData,
+  useReduxUserActions,
+} from "../../model/redux-slice-users";
 
 const Header = () => {
   const noDecoration = {
     textDecoration: "inherit",
     color: "inherit",
+  };
+
+  const AccountManagementControls = () => {
+    const { currentUserId } = useSelector(selectUserData);
+    const { signOutUser } = useReduxUserActions();
+    if (currentUserId)
+      return (
+        <Button
+          color="inherit"
+          size="large"
+          variant="outlined"
+          onClick={signOutUser}
+        >
+          Sign Out
+        </Button>
+      );
+    else
+      return (
+        <>
+          <Button color="inherit" size="large" variant="outlined">
+            <Link to="/sign-up" style={noDecoration}>
+              Sign Up
+            </Link>
+          </Button>
+
+          <Button color="inherit" size="large" variant="outlined">
+            <Link to="/sign-in" style={noDecoration}>
+              Sign In
+            </Link>
+          </Button>
+        </>
+      );
   };
 
   return (
@@ -26,17 +63,7 @@ const Header = () => {
           </Typography>
 
           <Stack direction="row" gap="1rem" alignItems="center">
-            <Button color="inherit" size="large" variant="outlined">
-              <Link to="/sign-up" style={noDecoration}>
-                Sign Up
-              </Link>
-            </Button>
-
-            <Button color="inherit" size="large" variant="outlined">
-              <Link to="/sign-in" style={noDecoration}>
-                Sign In
-              </Link>
-            </Button>
+            <AccountManagementControls />
           </Stack>
         </Stack>
       </AppBar>
