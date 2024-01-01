@@ -1,10 +1,28 @@
 import { selectUserData } from "./redux-slice-users";
 import { useSelector } from "react-redux";
 
+export type ValidatorFunction = (input: string) => {
+  isValid: boolean;
+  message: string;
+};
+
+export const checkIfEmpty: ValidatorFunction = (input) => {
+  if (input.trim().length > 0)
+    return {
+      isValid: true,
+      message: "",
+    };
+  else
+    return {
+      isValid: false,
+      message: "Should not be empty",
+    };
+};
+
 export const useValidateSignUpForm = () => {
   const { allUsers } = useSelector(selectUserData);
 
-  const validateUserName = (input: string) => {
+  const validateUserName: ValidatorFunction = (input) => {
     const processedInput = input.trim().toLowerCase();
 
     if (processedInput.length < 3)
@@ -24,7 +42,7 @@ export const useValidateSignUpForm = () => {
     return { isValid: true, message: "This user name is valid" };
   };
 
-  const validatePassword = (input: string) => {
+  const validatePassword: ValidatorFunction = (input) => {
     if (input.startsWith(" ") || input.endsWith(" "))
       return {
         isValid: false,

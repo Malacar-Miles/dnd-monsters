@@ -57,11 +57,11 @@ export const usersSlice = createSlice({
 
     signIn: (state, action: PayloadAction<UserCredentials>) => {
       const { name, password } = action.payload;
-      const userId = name.toLowerCase();
+      const userId = name.trim().toLowerCase();
       if (!state.allUsers[userId]) {
         state.operationResult = {
           status: "failure",
-          message: `Attempting to log in as a user "${userId}" that doesn't exist.`,
+          message: `User "${name.trim()}" doesn't exist.`,
         };
         return;
       }
