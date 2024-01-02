@@ -2,11 +2,8 @@ import { Box, TextField, Button, Stack, Typography } from "@mui/material";
 import { Check, Block } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  useReduxUserActions,
-  selectUserData,
-} from "../../model/redux-slice-users";
-import type { ValidatorFunction } from "../../model/form-validation";
+import { useReduxUserActions, selectUserData } from "entities/user";
+import type { ValidatorFunction } from "features/form-validation";
 
 type UserCredentialsFormProps = {
   headerText: string;

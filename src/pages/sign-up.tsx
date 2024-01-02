@@ -1,7 +1,7 @@
-import PageContentContainer from "../components/page-content-container";
-import UserCredentialsForm from "../components/user-credentials-form";
-import { useValidateSignUpForm } from "../../model/form-validation";
-import { useReduxUserActions } from "../../model/redux-slice-users";
+import PageContentContainer from "shared/ui/page-content-container";
+import UserCredentialsForm from "widgets/user-credentials-form";
+import { useValidateSignUpForm } from "features/form-validation";
+import { useReduxUserActions } from "entities/user";
 
 const SignUpPage = () => {
   const { createUser } = useReduxUserActions();

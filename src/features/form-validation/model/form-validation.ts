@@ -1,4 +1,4 @@
-import { selectUserData } from "./redux-slice-users";
+import { selectUserData } from "entities/user";
 import { useSelector } from "react-redux";
 
 export type ValidatorFunction = (input: string) => {

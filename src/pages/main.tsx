@@ -1,4 +1,4 @@
-import PlaceholderPage from "./placeholder";
+import PlaceholderPage from "widgets/placeholder";
 
 const MainPage = () => {
   return <PlaceholderPage pageName="Main" />;

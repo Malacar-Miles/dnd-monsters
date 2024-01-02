@@ -1,10 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { AppBar, Typography, Stack, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import {
-  selectUserData,
-  useReduxUserActions,
-} from "../../model/redux-slice-users";
+import { selectUserData, useReduxUserActions } from "entities/user";
 
 const Header = () => {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "./redux-store";
-import type { User, UserDataStorage } from "./data";
-import { blankUser } from "./data";
+import type { RootState } from "app/redux-store";
+import type { User, UserDataStorage } from "./types";
+import { blankUser } from "./types";
 import { useDispatch } from "react-redux";
 
 type OperationResult = {
@@ -32,7 +32,7 @@ type UserCredentials = {
   password: string;
 };
 
-export const usersSlice = createSlice({
+const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
