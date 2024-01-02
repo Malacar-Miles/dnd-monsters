@@ -13,6 +13,7 @@ const SignUpPage = () => {
       <UserCredentialsForm
         headerText="Create New Account"
         buttonText="Sign Up"
+        formType="sign-up"
         handleFormSubmit={createUser}
         validateUserName={validateUserName}
         validatePassword={validatePassword}

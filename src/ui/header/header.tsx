@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AppBar, Typography, Stack, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import {
@@ -7,6 +7,10 @@ import {
 } from "../../model/redux-slice-users";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const navigateToSignUp = () => navigate("sign-up");
+  const navigateToSignIn = () => navigate("sign-in");
+
   const noDecoration = {
     textDecoration: "inherit",
     color: "inherit",
@@ -29,16 +33,22 @@ const Header = () => {
     else
       return (
         <>
-          <Button color="inherit" size="large" variant="outlined">
-            <Link to="/sign-up" style={noDecoration}>
-              Sign Up
-            </Link>
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            onClick={navigateToSignUp}
+          >
+            Sign Up
           </Button>
 
-          <Button color="inherit" size="large" variant="outlined">
-            <Link to="/sign-in" style={noDecoration}>
-              Sign In
-            </Link>
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            onClick={navigateToSignIn}
+          >
+            Sign In
           </Button>
         </>
       );
@@ -67,8 +77,6 @@ const Header = () => {
           </Stack>
         </Stack>
       </AppBar>
-
-      <Outlet />
     </>
   );
 };

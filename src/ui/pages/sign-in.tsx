@@ -11,6 +11,7 @@ const SignInPage = () => {
       <UserCredentialsForm
         headerText="Sign In"
         buttonText="Sign In"
+        formType="sign-in"
         handleFormSubmit={signInUser}
         validateUserName={checkIfEmpty}
         validatePassword={checkIfEmpty}

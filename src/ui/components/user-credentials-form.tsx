@@ -11,6 +11,7 @@ import type { ValidatorFunction } from "../../model/form-validation";
 type UserCredentialsFormProps = {
   headerText: string;
   buttonText: string;
+  formType: "sign-up" | "sign-in";
   handleFormSubmit: (formUsername: string, formPassword: string) => void;
   validateUserName: ValidatorFunction;
   validatePassword: ValidatorFunction;
@@ -20,6 +21,7 @@ const UserCredentialsForm = (props: UserCredentialsFormProps) => {
   const {
     headerText,
     buttonText,
+    formType,
     handleFormSubmit,
     validateUserName,
     validatePassword,
@@ -64,6 +66,9 @@ const UserCredentialsForm = (props: UserCredentialsFormProps) => {
         </Typography>
       </Stack>
     ) : null;
+
+  const passwordAutocomplete =
+    formType === "sign-up" ? "new-password" : "current-password";
 
   const showUserNameError =
     formUserName.length > 0 &&
@@ -114,7 +119,7 @@ const UserCredentialsForm = (props: UserCredentialsFormProps) => {
             disabled={disableTextFields}
             id="user-name"
             label="User Name"
-            autoComplete="off"
+            autoComplete="username"
             value={formUserName}
             onChange={handleUserNameChange}
             error={showUserNameError}
@@ -126,6 +131,7 @@ const UserCredentialsForm = (props: UserCredentialsFormProps) => {
             id="password"
             label="Password"
             type="password"
+            autoComplete={passwordAutocomplete}
             value={formPassword}
             onChange={handlePasswordChange}
             error={showPasswordError}

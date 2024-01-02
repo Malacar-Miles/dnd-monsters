@@ -11,18 +11,16 @@ import MainPage from "./ui/pages/main";
 import SignUpPage from "./ui/pages/sign-up";
 import SignInPage from "./ui/pages/sign-in";
 
-
 function App() {
   return (
     <>
       <CssBaseline />
       <Container maxWidth="xl">
+        <Header />
         <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<MainPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/sign-in" element={<SignInPage />} />
-          </Route>
+          <Route index element={<MainPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/sign-in" element={<SignInPage />} />
         </Routes>
       </Container>
     </>
