@@ -121,4 +121,4 @@ export const useReduxUserActions = () => {
   return { createUser, signInUser, signOutUser, resetUserOperationResult };
 };
 
-export default usersSlice.reducer;
+export const usersReducer = usersSlice.reducer;

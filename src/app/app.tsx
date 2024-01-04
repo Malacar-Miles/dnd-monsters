@@ -8,12 +8,18 @@ import { Container } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux-store";
+import { useEffect } from "react";
+import { dndMonsterApi } from "entities/monster";
 import Header from "widgets/header";
 import MainPage from "pages/main";
 import SignUpPage from "pages/sign-up";
 import SignInPage from "pages/sign-in";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(dndMonsterApi.endpoints.getAllMonsterNames.initiate());
+  }, []);
+
   return (
     <BrowserRouter>
       <Provider store={store}>

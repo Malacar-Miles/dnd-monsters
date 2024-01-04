@@ -7,11 +7,13 @@ export const dndMonsterApi = createApi({
     baseUrl: "https://www.dnd5eapi.co/api/monsters",
   }),
   endpoints: (builder) => ({
-    getAllMonsterNames: builder.query<MonsterBasicData[], null>({
+    getAllMonsterNames: builder.query<MonsterBasicData[], void>({
       query: () => "/",
+      keepUnusedDataFor: 86400, // Keep for 24 hours
     }),
     getSpecificMonsterData: builder.query<MonsterExtendedData, string>({
       query: (index) => `/${index}`,
+      keepUnusedDataFor: 3600, // Keep for 1 hour
     }),
   }),
 });
