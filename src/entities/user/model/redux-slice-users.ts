@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "app/redux-store";
-import type { User, UserDataStorage } from "./types";
-import { blankUser } from "./types";
+import type { User, UserDataStorage } from "./data";
+import { blankUser } from "./data";
 import { useDispatch } from "react-redux";
 
 type OperationResult = {
@@ -38,7 +38,7 @@ const usersSlice = createSlice({
   reducers: {
     create: (state, action: PayloadAction<UserCredentials>) => {
       const newUserCredentials = action.payload;
-      const userId = newUserCredentials.name.toLowerCase();
+      const userId = newUserCredentials.name.trim().toLowerCase();
       if (state.allUsers[userId]) {
         state.operationResult = {
           status: "failure",
@@ -81,6 +81,10 @@ const usersSlice = createSlice({
 
     signOut: (state) => {
       state.currentUserId = null;
+      state.operationResult = {
+        status: "success",
+        message: "You have signed out",
+      };
     },
 
     resetOperationResult: (state) => {

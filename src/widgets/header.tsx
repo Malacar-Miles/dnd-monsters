@@ -65,7 +65,7 @@ const Header = () => {
         >
           <Typography variant="h3">
             <Link to="/" style={noDecoration}>
-              Placeholder Site Name
+              DnD Monsters
             </Link>
           </Typography>
 
