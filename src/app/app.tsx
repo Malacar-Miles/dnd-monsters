@@ -14,6 +14,8 @@ import Header from "widgets/header";
 import MainPage from "pages/main";
 import SignUpPage from "pages/sign-up";
 import SignInPage from "pages/sign-in";
+import SearchResultsPage from "pages/search-results";
+import MonsterPage from "pages/monster";
 
 function App() {
   useEffect(() => {
@@ -30,6 +32,11 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route
+              path="/search/:searchQuery?"
+              element={<SearchResultsPage />}
+            />
+            <Route path="/monster/:monsterIndex?" element={<MonsterPage />} />
           </Routes>
         </Container>
       </Provider>
