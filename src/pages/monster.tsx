@@ -1,4 +1,4 @@
-import PlaceholderPage from "widgets/placeholder";
+import PlaceholderPage from "shared/ui/placeholder";
 
 const MonsterPage = () => {
   return <PlaceholderPage pageName="Monster" />;

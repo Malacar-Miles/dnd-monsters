@@ -7,15 +7,17 @@ const MonsterSearchBar = ({
   prefilledQueryText?: string;
 }) => {
   const { data } = useGetAllMonsterNamesQuery();
+  const searchableData = data ? data.results : undefined;
 
   return (
     <SearchBar
-      data={data}
+      searchableData={searchableData}
       fieldToSearchBy="name"
       indexField="index"
       searchResultsPageUrl="search"
       individualResultPageUrl="monster"
       prefilledQueryText={prefilledQueryText}
+      placeholderText="Search by monster name"
     />
   );
 };

@@ -1,10 +1,18 @@
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { Construction } from "@mui/icons-material";
-import PageContentContainer from "shared/ui/page-content-container";
 
 const PlaceholderPage = ({ pageName }: { pageName: string }) => {
   return (
-    <PageContentContainer>
+    <Paper
+      component="main"
+      sx={{
+        padding: "0.5rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "50vh",
+      }}
+    >
       <Box
         sx={{
           textAlign: "center",
@@ -12,7 +20,7 @@ const PlaceholderPage = ({ pageName }: { pageName: string }) => {
       >
         <Construction /> The page "{pageName}" is under construction
       </Box>
-    </PageContentContainer>
+    </Paper>
   );
 };
 

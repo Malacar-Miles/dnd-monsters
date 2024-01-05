@@ -1,5 +1,5 @@
 import MonsterSearchBar from "widgets/monster-search-bar";
-import PlaceholderPage from "widgets/placeholder";
+import PlaceholderPage from "shared/ui/placeholder";
 
 const MainPage = () => {
   return (

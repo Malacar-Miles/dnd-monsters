@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import PlaceholderPage from "widgets/placeholder";
+import PlaceholderPage from "shared/ui/placeholder";
 import MonsterSearchBar from "widgets/monster-search-bar";
 
 const SearchResultsPage = () => {
