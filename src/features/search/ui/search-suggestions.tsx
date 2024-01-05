@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from "@mui/material";
-import type { SearchSuggestion } from "../model/search-logic";
+import { SearchResult, generateNavigateFunction } from "../model/search-logic";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -8,7 +8,7 @@ export const SearchSuggestions = ({
   individualResultPageUrl,
   anchorEl,
 }: {
-  searchSuggestions: SearchSuggestion[] | undefined;
+  searchSuggestions: SearchResult[] | undefined;
   individualResultPageUrl: string;
   anchorEl: HTMLElement | null;
 }) => {
@@ -20,12 +20,6 @@ export const SearchSuggestions = ({
       setIsOpen(true);
     else setIsOpen(false);
   }, [searchSuggestions, anchorEl]);
-
-  const generateNavigateFunction = (index: string) => {
-    return function () {
-      navigate(`/${individualResultPageUrl}/${index}`);
-    };
-  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -44,7 +38,11 @@ export const SearchSuggestions = ({
         <MenuItem
           role="link"
           key={suggestionItem.index}
-          onClick={generateNavigateFunction(suggestionItem.index)}
+          onClick={generateNavigateFunction(
+            suggestionItem.index,
+            individualResultPageUrl,
+            navigate
+          )}
         >
           {suggestionItem.displayText}
         </MenuItem>

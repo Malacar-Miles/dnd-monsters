@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import { Construction } from "@mui/icons-material";
+import { Error } from "@mui/icons-material";
 import PageContentContainer from "./page-content-container";
 
-const PlaceholderPage = ({ pageName }: { pageName: string }) => {
+const ErrorPage = () => {
   return (
     <PageContentContainer>
       <Box
@@ -10,10 +10,10 @@ const PlaceholderPage = ({ pageName }: { pageName: string }) => {
           textAlign: "center",
         }}
       >
-        <Construction /> The page "{pageName}" is under construction
+        <Error /> Error! Something went wrong.
       </Box>
     </PageContentContainer>
   );
 };
 
-export default PlaceholderPage;
+export default ErrorPage;

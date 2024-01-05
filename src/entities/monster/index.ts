@@ -3,6 +3,7 @@ export {
   useGetAllMonsterNamesQuery,
   useGetSpecificMonsterDataQuery,
 } from "./api/dnd-monster-api";
+
 export type {
   MonsterBasicData,
   MonsterExtendedData,

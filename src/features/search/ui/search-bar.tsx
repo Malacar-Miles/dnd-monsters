@@ -2,10 +2,7 @@ import { Paper, TextField, Button } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  generateSearchSuggestions,
-  type DataItem,
-} from "../model/search-logic";
+import { generateSearchResults, type DataItem } from "../model/search-logic";
 import { SearchSuggestions } from "./search-suggestions";
 
 type SearchBarProps<T> = {
@@ -53,12 +50,12 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
 
   const searchSuggestions =
     searchableData && queryText
-      ? generateSearchSuggestions<T>({
+      ? generateSearchResults<T>({
           searchableData,
           searchQuery: queryText,
           fieldToSearchBy,
           indexField,
-          maxSuggestions: 5,
+          maxResults: 5,
         })
       : undefined;
 
