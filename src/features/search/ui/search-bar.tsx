@@ -65,6 +65,7 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
   return (
     <Paper
       component="form"
+      role="search"
       sx={{
         padding: "0.5rem",
         margin: "0.5rem 0",
@@ -77,6 +78,7 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
       <SearchIcon />
       <TextField
         type="search"
+        autoComplete="off"
         value={queryText}
         onChange={handleChange}
         placeholder={placeholderText}

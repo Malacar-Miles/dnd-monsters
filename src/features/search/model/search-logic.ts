@@ -18,7 +18,7 @@ export const generateSearchSuggestions = <T extends DataItem>({
   searchQuery: string;
   fieldToSearchBy: string;
   indexField: string;
-  maxSuggestions: number;
+  maxSuggestions?: number;
 }): SearchSuggestion[] => {
   const processedSearchQuery = searchQuery.trim().toLowerCase();
   const result = [];
@@ -35,7 +35,7 @@ export const generateSearchSuggestions = <T extends DataItem>({
         displayText: stringToSearchIn,
         index: currentItem[indexField],
       });
-    if (result.length >= maxSuggestions) break;
+    if (maxSuggestions && result.length >= maxSuggestions) break;
   }
 
   return result;
