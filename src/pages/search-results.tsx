@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
-import { Stack, Typography, Skeleton } from "@mui/material";
+import { Typography, Skeleton } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import MonsterSearchBar from "widgets/monster-search-bar";
 import { useGetAllMonsterNamesQuery } from "entities/monster";
 import { generateSearchResults, SearchResultCard } from "features/search";
 import ErrorPage from "shared/ui/error";
 import URL_PATHS from "app/url-paths";
+import { constructMonsterImageUrl } from "entities/monster";
 
 const BigText = ({ children }: { children: React.ReactNode }) => (
-  <Typography fontSize="2rem" textAlign="center">
+  <Typography fontSize="1.5rem" textAlign="center">
     {children}
   </Typography>
 );
@@ -49,15 +51,18 @@ const SearchResultsPage = () => {
         searchResults && (
           <>
             <BigText>Results found: {searchResults.length}</BigText>
-            <Stack gap="1rem">
+            <Grid container spacing="1rem" justifyContent="space-evenly">
               {searchResults.map((result) => (
-                <SearchResultCard
-                  key={result.index}
-                  item={result}
-                  individualResultPageUrl={URL_PATHS.monsterRoot}
-                />
+                <Grid key={result.index}>
+                  <SearchResultCard
+                    item={result}
+                    individualResultPageUrl={URL_PATHS.monsterRoot}
+                    getImageUrlFunction={constructMonsterImageUrl}
+                    fallbackImageUrl="\images\monster-fallback-image.png"
+                  />
+                </Grid>
               ))}
-            </Stack>
+            </Grid>
           </>
         )
       )}

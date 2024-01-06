@@ -1,24 +1,35 @@
 import {
   Card,
-  CardContent,
+  CardHeader,
+  CardMedia,
   CardActions,
   Button,
-  Typography,
 } from "@mui/material";
 import {
   type SearchResult,
   generateNavigateFunction,
 } from "../model/search-logic";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const SearchResultCard = ({
   item,
   individualResultPageUrl,
+  getImageUrlFunction,
+  fallbackImageUrl,
 }: {
   item: SearchResult;
   individualResultPageUrl: string;
+  getImageUrlFunction?: (index: string) => string;
+  fallbackImageUrl: string;
 }) => {
   const navigate = useNavigate();
+
+  const cardImageUrl = getImageUrlFunction
+    ? getImageUrlFunction(item.index)
+    : fallbackImageUrl;
+
+  const [imageUrl, setImageUrl] = useState(cardImageUrl);
 
   const handleClick = generateNavigateFunction(
     item.index,
@@ -26,13 +37,25 @@ export const SearchResultCard = ({
     navigate
   );
 
+  const handleImageError = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    event.stopPropagation();
+    setImageUrl(fallbackImageUrl);
+  };
+
   return (
     <Card>
-      <CardContent>
-        <Typography variant="h3" fontSize="2rem">
-          {item.displayText}
-        </Typography>
-      </CardContent>
+      <CardHeader title={item.displayText} />
+      {getImageUrlFunction && (
+        <CardMedia
+          component="img"
+          height="194"
+          image={imageUrl}
+          alt={item.displayText}
+          onError={handleImageError}
+        />
+      )}
       <CardActions>
         <Button size="small" onClick={handleClick}>
           View Page

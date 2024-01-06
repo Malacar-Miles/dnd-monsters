@@ -1,6 +1,8 @@
 import { useGetAllMonsterNamesQuery } from "entities/monster";
-import { SearchBar } from "features/search";
+import { SearchBar, QUERY_THAT_RETURNS_ALL_ITEMS } from "features/search";
 import URL_PATHS from "app/url-paths";
+
+const placeholderText = `Type "${QUERY_THAT_RETURNS_ALL_ITEMS}" to see all monsters`;
 
 const MonsterSearchBar = ({
   prefilledQueryText,
@@ -18,7 +20,7 @@ const MonsterSearchBar = ({
       searchResultsPageUrl={URL_PATHS.searchRoot}
       individualResultPageUrl={URL_PATHS.monsterRoot}
       prefilledQueryText={prefilledQueryText}
-      placeholderText="Search by monster name"
+      placeholderText={placeholderText}
     />
   );
 };
