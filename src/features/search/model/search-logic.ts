@@ -40,6 +40,7 @@ export const generateSearchResults = <T extends DataItem>({
   const returnAllItems = searchQuery === QUERY_THAT_RETURNS_ALL_ITEMS;
 
   for (let i = 0; i < searchableData.length; i++) {
+    if (maxResults && returnAllItems) break;
     if (maxResults && result.length > maxResults) break;
 
     const currentItem = searchableData[i];

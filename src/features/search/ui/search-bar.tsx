@@ -27,6 +27,7 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
   } = props;
 
   const [queryText, setQueryText] = useState("");
+  const [allowSearchSuggestions, setAllowSearchSuggestions] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -39,12 +40,14 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryText(event.target.value);
     setAnchorEl(event.target);
+    setAllowSearchSuggestions(true);
   };
 
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     const encodedSearchQuery = encodeURIComponent(queryText);
     const url = `${searchResultsPageUrl}/${encodedSearchQuery}`;
+    setAllowSearchSuggestions(false);
     navigate(url);
   };
 
@@ -83,6 +86,7 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
         sx={{ flexGrow: "1" }}
       />
       <SearchSuggestions
+        allowSearchSuggestions={allowSearchSuggestions}
         searchSuggestions={searchSuggestions}
         individualResultPageUrl={individualResultPageUrl}
         anchorEl={anchorEl}

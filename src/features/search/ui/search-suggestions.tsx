@@ -7,19 +7,26 @@ export const SearchSuggestions = ({
   searchSuggestions,
   individualResultPageUrl,
   anchorEl,
+  allowSearchSuggestions,
 }: {
   searchSuggestions: SearchResult[] | undefined;
   individualResultPageUrl: string;
   anchorEl: HTMLElement | null;
+  allowSearchSuggestions: boolean;
 }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (searchSuggestions && searchSuggestions.length > 0 && anchorEl)
+    if (
+      allowSearchSuggestions &&
+      searchSuggestions &&
+      searchSuggestions.length > 0 &&
+      anchorEl
+    )
       setIsOpen(true);
     else setIsOpen(false);
-  }, [searchSuggestions, anchorEl]);
+  }, [allowSearchSuggestions, searchSuggestions, anchorEl]);
 
   const handleClose = () => {
     setIsOpen(false);
