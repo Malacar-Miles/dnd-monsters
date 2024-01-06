@@ -4,9 +4,25 @@ import MonsterSearchBar from "widgets/monster-search-bar";
 import { useGetAllMonsterNamesQuery } from "entities/monster";
 import { generateSearchResults, SearchResultCard } from "features/search";
 import ErrorPage from "shared/ui/error";
+import URL_PATHS from "app/url-paths";
+
+const BigText = ({ children }: { children: React.ReactNode }) => (
+  <Typography fontSize="2rem" textAlign="center">
+    {children}
+  </Typography>
+);
+
+const ResultsSkeleton = () => (
+  <>
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" animation="wave" />
+    <Skeleton height="3rem" animation={false} />
+  </>
+);
 
 const SearchResultsPage = () => {
-  const { searchQuery } = useParams();
+  const urlParams = useParams();
+  const searchQuery = urlParams[URL_PATHS.searchParam];
   const { error, isLoading, data } = useGetAllMonsterNamesQuery();
   const allMonsters = data?.results;
   const searchResults =
@@ -23,22 +39,22 @@ const SearchResultsPage = () => {
       <MonsterSearchBar prefilledQueryText={searchQuery} />
 
       {!searchQuery ? (
-        <Typography>Please enter a search query</Typography>
+        <BigText>Please enter a search query</BigText>
       ) : error ? (
         <ErrorPage />
       ) : isLoading ? (
-        <Skeleton variant="rectangular" sx={{ minHeight: "50vh" }} />
+        <ResultsSkeleton />
       ) : (
         allMonsters &&
         searchResults && (
           <>
-            <Typography>Results found: {searchResults.length}</Typography>
-            <Stack direction="row" flexWrap="wrap" gap="1rem">
+            <BigText>Results found: {searchResults.length}</BigText>
+            <Stack gap="1rem">
               {searchResults.map((result) => (
                 <SearchResultCard
                   key={result.index}
                   item={result}
-                  individualResultPageUrl="monster"
+                  individualResultPageUrl={URL_PATHS.monsterRoot}
                 />
               ))}
             </Stack>

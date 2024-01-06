@@ -2,11 +2,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { AppBar, Typography, Stack, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectUserData, useReduxUserActions } from "entities/user";
+import URL_PATHS from "app/url-paths";
 
 const Header = () => {
   const navigate = useNavigate();
-  const navigateToSignUp = () => navigate("sign-up");
-  const navigateToSignIn = () => navigate("sign-in");
+  const navigateToSignUp = () => navigate(URL_PATHS.signUp);
+  const navigateToSignIn = () => navigate(URL_PATHS.signIn);
 
   const noDecoration = {
     textDecoration: "inherit",
@@ -64,7 +65,7 @@ const Header = () => {
           alignItems="center"
         >
           <Typography variant="h3">
-            <Link to="/" style={noDecoration}>
+            <Link to={URL_PATHS.root} style={noDecoration}>
               DnD Monsters
             </Link>
           </Typography>

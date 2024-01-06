@@ -1,5 +1,6 @@
 import { useGetAllMonsterNamesQuery } from "entities/monster";
 import { SearchBar } from "features/search";
+import URL_PATHS from "app/url-paths";
 
 const MonsterSearchBar = ({
   prefilledQueryText,
@@ -14,8 +15,8 @@ const MonsterSearchBar = ({
       searchableData={searchableData}
       fieldToSearchBy="name"
       indexField="index"
-      searchResultsPageUrl="search"
-      individualResultPageUrl="monster"
+      searchResultsPageUrl={URL_PATHS.searchRoot}
+      individualResultPageUrl={URL_PATHS.monsterRoot}
       prefilledQueryText={prefilledQueryText}
       placeholderText="Search by monster name"
     />

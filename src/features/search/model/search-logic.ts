@@ -15,7 +15,7 @@ export const generateNavigateFunction = (
   navigate: NavigateFunction
 ) => {
   return function () {
-    navigate(`/${individualResultPageUrl}/${index}`);
+    navigate(`${individualResultPageUrl}/${index}`);
   };
 };
 

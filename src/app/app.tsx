@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux-store";
 import { useEffect } from "react";
 import { dndMonsterApi } from "entities/monster";
+import URL_PATHS from "./url-paths";
 import Header from "widgets/header";
 import MainPage from "pages/main";
 import SignUpPage from "pages/sign-up";
@@ -30,13 +31,10 @@ function App() {
           <Header />
           <Routes>
             <Route index element={<MainPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/sign-in" element={<SignInPage />} />
-            <Route
-              path="/search/:searchQuery?"
-              element={<SearchResultsPage />}
-            />
-            <Route path="/monster/:monsterIndex?" element={<MonsterPage />} />
+            <Route path={URL_PATHS.signUp} element={<SignUpPage />} />
+            <Route path={URL_PATHS.signIn} element={<SignInPage />} />
+            <Route path={URL_PATHS.search} element={<SearchResultsPage />} />
+            <Route path={URL_PATHS.monster} element={<MonsterPage />} />
           </Routes>
         </Container>
       </Provider>

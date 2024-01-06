@@ -29,7 +29,9 @@ export const SearchResultCard = ({
   return (
     <Card>
       <CardContent>
-        <Typography variant="h3">{item.displayText}</Typography>
+        <Typography variant="h3" fontSize="2rem">
+          {item.displayText}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={handleClick}>

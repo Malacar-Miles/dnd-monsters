@@ -44,7 +44,7 @@ export function SearchBar<T extends DataItem>(props: SearchBarProps<T>) {
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     const encodedSearchQuery = encodeURIComponent(queryText);
-    const url = `/${searchResultsPageUrl}/${encodedSearchQuery}`;
+    const url = `${searchResultsPageUrl}/${encodedSearchQuery}`;
     navigate(url);
   };
 
