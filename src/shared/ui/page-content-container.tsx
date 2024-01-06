@@ -4,7 +4,6 @@ const PageContentContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <Paper
       component="main"
-      elevation={3}
       sx={{
         padding: "0.5rem",
         display: "flex",

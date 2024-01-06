@@ -15,7 +15,7 @@ import Header from "widgets/header";
 import MainPage from "pages/main";
 import SignUpPage from "pages/sign-up";
 import SignInPage from "pages/sign-in";
-import SearchResultsPage from "pages/search-results";
+import SearchPage from "pages/search";
 import MonsterPage from "pages/monster";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path={URL_PATHS.signUp} element={<SignUpPage />} />
             <Route path={URL_PATHS.signIn} element={<SignInPage />} />
-            <Route path={URL_PATHS.search} element={<SearchResultsPage />} />
+            <Route path={URL_PATHS.search} element={<SearchPage />} />
             <Route path={URL_PATHS.monster} element={<MonsterPage />} />
           </Routes>
         </Container>

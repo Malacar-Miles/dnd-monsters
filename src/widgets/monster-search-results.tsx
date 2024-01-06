@@ -1,7 +1,5 @@
-import { useParams } from "react-router-dom";
 import { Typography, Skeleton } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import MonsterSearchBar from "widgets/monster-search-bar";
 import { useGetAllMonsterNamesQuery } from "entities/monster";
 import { generateSearchResults, SearchResultCard } from "features/search";
 import ErrorPage from "shared/ui/error";
@@ -22,9 +20,11 @@ const ResultsSkeleton = () => (
   </>
 );
 
-const SearchResultsPage = () => {
-  const urlParams = useParams();
-  const searchQuery = urlParams[URL_PATHS.searchParam];
+const MonsterSearchResults = ({
+  searchQuery,
+}: {
+  searchQuery: string | undefined;
+}) => {
   const { error, isLoading, data } = useGetAllMonsterNamesQuery();
   const allMonsters = data?.results;
   const searchResults =
@@ -38,8 +38,6 @@ const SearchResultsPage = () => {
       : undefined;
   return (
     <>
-      <MonsterSearchBar prefilledQueryText={searchQuery} />
-
       {!searchQuery ? (
         <BigText>Please enter a search query</BigText>
       ) : error ? (
@@ -70,4 +68,4 @@ const SearchResultsPage = () => {
   );
 };
 
-export default SearchResultsPage;
+export default MonsterSearchResults;
