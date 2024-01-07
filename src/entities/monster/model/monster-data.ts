@@ -5,20 +5,20 @@ export type MonsterBasicData = {
 };
 
 export type Attributes = {
-  charisma: number;
-  constitution: number;
-  dexterity: number;
-  intelligence: number;
-  strength: number;
-  wisdom: number;
+  charisma?: number;
+  constitution?: number;
+  dexterity?: number;
+  intelligence?: number;
+  strength?: number;
+  wisdom?: number;
 };
 
 export type MonsterExtendedData = MonsterBasicData &
   Attributes & {
-    image: string;
-    size: "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gargantuan";
-    type: string;
-    alignment:
+    image?: string;
+    size?: "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gargantuan";
+    type?: string;
+    alignment?:
       | "chaotic neutral"
       | "chaotic evil"
       | "chaotic good"
@@ -30,8 +30,9 @@ export type MonsterExtendedData = MonsterBasicData &
       | "neutral good"
       | "any alignment"
       | "unaligned";
-    hit_points: number;
-    challenge_rating: number;
-    proficiency_bonus: number;
-    xp: number;
+    hit_points?: number;
+    challenge_rating?: number;
+    proficiency_bonus?: number;
+    xp?: number;
+    desc?: string | [string];
   };

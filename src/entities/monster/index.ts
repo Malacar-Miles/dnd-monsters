@@ -6,8 +6,10 @@ export {
 
 export { constructMonsterImageUrl } from "./api/image-paths";
 
+export { MonsterDetails } from "./ui/monster-details";
+
 export type {
   MonsterBasicData,
   MonsterExtendedData,
   Attributes,
-} from "./model/data";
+} from "./model/monster-data";

@@ -1,7 +1,11 @@
-import PlaceholderPage from "shared/ui/placeholder";
+import { useParams } from "react-router-dom";
+import URL_PATHS from "app/url-paths";
+import { MonsterDetails } from "entities/monster";
 
 const MonsterPage = () => {
-  return <PlaceholderPage pageName="Monster" />;
+  const param = useParams();
+  const monsterIndex = param[URL_PATHS.monsterParam] || "";
+  return <MonsterDetails monsterIndex={monsterIndex} />;
 };
 
 export default MonsterPage;

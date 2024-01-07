@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { MonsterBasicData, MonsterExtendedData } from "../model/data";
+import type {
+  MonsterBasicData,
+  MonsterExtendedData,
+} from "../model/monster-data";
 
 type IndexQueryResult = {
   count: number;
