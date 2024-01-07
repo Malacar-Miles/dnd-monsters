@@ -1,10 +1,16 @@
 import { Typography, Skeleton } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useGetAllMonsterNamesQuery } from "entities/monster";
-import { generateSearchResults, SearchResultCard } from "features/search";
+import {
+  generateSearchResults,
+  SearchResultCard,
+  useReduxSearchHistoryActions,
+} from "features/search";
 import ErrorPage from "shared/ui/error";
 import URL_PATHS from "app/url-paths";
 import { constructMonsterImageUrl } from "entities/monster";
+import { useSelector } from "react-redux";
+import { selectUserData } from "entities/user";
 
 const BigText = ({ children }: { children: React.ReactNode }) => (
   <Typography fontSize="1.5rem" textAlign="center">
@@ -25,6 +31,9 @@ const MonsterSearchResults = ({
 }: {
   searchQuery: string | undefined;
 }) => {
+  const { currentUserId } = useSelector(selectUserData);
+  const { addSearchHistoryItem } = useReduxSearchHistoryActions();
+
   const { error, isLoading, data } = useGetAllMonsterNamesQuery();
   const allMonsters = data?.results;
   const searchResults =
@@ -36,6 +45,10 @@ const MonsterSearchResults = ({
           indexField: "index",
         })
       : undefined;
+
+  if (currentUserId && searchQuery && searchResults)
+    addSearchHistoryItem(currentUserId, searchQuery, searchResults.length);
+
   return (
     <>
       {!searchQuery ? (

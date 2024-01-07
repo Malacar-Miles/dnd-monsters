@@ -16,6 +16,8 @@ const URL_PATHS = {
 
   signIn: "/sign-in",
   signUp: "/sign-up",
+
+  history: "/history",
 };
 
 Object.setPrototypeOf(URL_PATHS, null);

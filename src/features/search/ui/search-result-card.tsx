@@ -44,9 +44,19 @@ export const SearchResultCard = ({
     setImageUrl(fallbackImageUrl);
   };
 
+  const truncateText = {
+    width: "10rem",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  };
+
   return (
-    <Card>
-      <CardHeader title={item.displayText} />
+    <Card sx={{ width: "12rem" }}>
+      <CardHeader
+        title={item.displayText}
+        titleTypographyProps={{ sx: truncateText }}
+      />
       {getImageUrlFunction && (
         <CardMedia
           component="img"

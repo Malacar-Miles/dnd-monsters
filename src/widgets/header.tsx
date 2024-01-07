@@ -8,6 +8,7 @@ const Header = () => {
   const navigate = useNavigate();
   const navigateToSignUp = () => navigate(URL_PATHS.signUp);
   const navigateToSignIn = () => navigate(URL_PATHS.signIn);
+  const navigateToHistory = () => navigate(URL_PATHS.history);
 
   const noDecoration = {
     textDecoration: "inherit",
@@ -19,14 +20,25 @@ const Header = () => {
     const { signOutUser } = useReduxUserActions();
     if (currentUserId)
       return (
-        <Button
-          color="inherit"
-          size="large"
-          variant="outlined"
-          onClick={signOutUser}
-        >
-          Sign Out
-        </Button>
+        <>
+          {" "}
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            onClick={navigateToHistory}
+          >
+            History
+          </Button>
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            onClick={signOutUser}
+          >
+            Sign Out
+          </Button>
+        </>
       );
     else
       return (

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "app/redux-store";
-import type { User, UserDataStorage } from "./data";
-import { blankUser } from "./data";
+import type { User, UserDataStorage } from "./user-data";
+import { blankUser } from "./user-data";
 import { useDispatch } from "react-redux";
 
 type OperationResult = {
