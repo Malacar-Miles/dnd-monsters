@@ -36,9 +36,8 @@ export const SearchHistory = ({ currentUser }: { currentUser: string }) => {
 
   // This workaround is needed because TS doesn't
   // know .toReversed method exists.
-  const reversedSearchHistory = (
-    searchHistory as any
-  ).toReversed() as HistoryDataEntry[];
+  const reverseSearchHistory = (input: any) =>
+    input.toReversed() as HistoryDataEntry[];
 
   return (
     <>
@@ -51,7 +50,7 @@ export const SearchHistory = ({ currentUser }: { currentUser: string }) => {
           Your search history is empty.
         </Typography>
       ) : (
-        reversedSearchHistory.map((searchHistoryItem, index) => (
+        reverseSearchHistory(searchHistory).map((searchHistoryItem, index) => (
           <SearchHistoryEntry
             key={index}
             searchHistoryItem={searchHistoryItem}
