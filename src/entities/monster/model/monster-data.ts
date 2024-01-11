@@ -1,3 +1,5 @@
+export const MONSTER_ENTITY_TYPE = "monster";
+
 export type MonsterBasicData = {
   index: string;
   name: string;

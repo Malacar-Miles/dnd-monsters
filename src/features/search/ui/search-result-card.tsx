@@ -10,18 +10,20 @@ import {
   generateNavigateFunction,
 } from "../model/search-logic";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const SearchResultCard = ({
   item,
   individualResultPageUrl,
   getImageUrlFunction,
   fallbackImageUrl,
+  extraAction,
 }: {
   item: SearchResult;
   individualResultPageUrl: string;
   getImageUrlFunction?: (index: string) => string;
   fallbackImageUrl: string;
+  extraAction?: React.ReactNode;
 }) => {
   const navigate = useNavigate();
 
@@ -66,10 +68,11 @@ export const SearchResultCard = ({
           onError={handleImageError}
         />
       )}
-      <CardActions>
+      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button size="small" onClick={handleClick}>
           View Page
         </Button>
+        {extraAction}
       </CardActions>
     </Card>
   );

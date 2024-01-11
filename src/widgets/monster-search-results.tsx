@@ -1,11 +1,15 @@
 import { Typography, Skeleton } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { useGetAllMonsterNamesQuery } from "entities/monster";
+import {
+  useGetAllMonsterNamesQuery,
+  MONSTER_ENTITY_TYPE,
+} from "entities/monster";
 import {
   generateSearchResults,
   SearchResultCard,
   useReduxSearchHistoryActions,
 } from "features/search";
+import { FavoriteButton } from "features/favorites";
 import ErrorPage from "shared/ui/error";
 import URL_PATHS from "app/url-paths";
 import { constructMonsterImageUrl } from "entities/monster";
@@ -70,6 +74,16 @@ const MonsterSearchResults = ({
                     individualResultPageUrl={URL_PATHS.monsterRoot}
                     getImageUrlFunction={constructMonsterImageUrl}
                     fallbackImageUrl="\images\monster-fallback-image.png"
+                    extraAction={
+                      currentUserId && (
+                        <FavoriteButton
+                          userId={currentUserId}
+                          componentSize="small"
+                          entityType={MONSTER_ENTITY_TYPE}
+                          entityId={result.index}
+                        />
+                      )
+                    }
                   />
                 </Grid>
               ))}

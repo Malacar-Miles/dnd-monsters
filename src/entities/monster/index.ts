@@ -13,3 +13,5 @@ export type {
   MonsterExtendedData,
   Attributes,
 } from "./model/monster-data";
+
+export { MONSTER_ENTITY_TYPE } from "./model/monster-data";
