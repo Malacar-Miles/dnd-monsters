@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { BookmarkAddOutlined, BookmarkAdded } from "@mui/icons-material";
 import {
   isEntityInFavorites,
@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 
 type FavoriteButtonProps = {
   componentSize: "small" | "normal";
-  userId: string;
   entityType: string;
   entityId: string;
 };
@@ -42,7 +41,7 @@ export const FavoriteButton = (props: FavoriteButtonProps) => {
 
   return (
     <Button size={buttonSize} onClick={handleClick}>
-      {buttonText}
+      {buttonText && <Typography marginRight="0.5rem">{buttonText}</Typography>}
       {alreadyAddedToFavorites ? <BookmarkAdded /> : <BookmarkAddOutlined />}
     </Button>
   );

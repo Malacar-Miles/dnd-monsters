@@ -75,14 +75,11 @@ const MonsterSearchResults = ({
                     getImageUrlFunction={constructMonsterImageUrl}
                     fallbackImageUrl="\images\monster-fallback-image.png"
                     extraAction={
-                      currentUserId && (
-                        <FavoriteButton
-                          userId={currentUserId}
-                          componentSize="small"
-                          entityType={MONSTER_ENTITY_TYPE}
-                          entityId={result.index}
-                        />
-                      )
+                      <FavoriteButton
+                        componentSize="small"
+                        entityType={MONSTER_ENTITY_TYPE}
+                        entityId={result.index}
+                      />
                     }
                   />
                 </Grid>

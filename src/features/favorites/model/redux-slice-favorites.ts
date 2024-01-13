@@ -26,7 +26,7 @@ export const isEntityInFavorites = (
   payload: FavoritesActionPayload
 ) => {
   const { userId, entityType, entityId } = payload;
-  return Boolean(state?.[userId]?.[entityType].includes(entityId));
+  return Boolean(state?.[userId]?.[entityType]?.includes(entityId));
 };
 
 const addEntityToFavorites = (

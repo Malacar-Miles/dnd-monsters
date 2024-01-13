@@ -27,7 +27,13 @@ export const store = configureStore({
     [dndMonsterApi.reducerPath]: dndMonsterApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(dndMonsterApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST"],
+        // ignoredActionPaths: ["meta.arg", "payload.timestamp"],
+        // ignoredPaths: ["items.dates"],
+      },
+    }).concat(dndMonsterApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

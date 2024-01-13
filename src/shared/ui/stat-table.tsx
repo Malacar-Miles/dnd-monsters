@@ -10,20 +10,20 @@ import {
 
 const NO_tableData = "unknown";
 
-export type StatTableProps = {
+export type StatTableData = {
   tableHeader: string | React.ReactNode;
   tableData: Array<[string, string | number | undefined]>;
 };
 
-const StatTable = (props: StatTableProps) => {
-  const { tableHeader, tableData } = props;
+const StatTable = ({ data }: { data: StatTableData }) => {
+  const { tableHeader, tableData } = data;
   return (
     <>
       <Typography variant="h3" textAlign="center">
         {tableHeader}
       </Typography>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: "20rem" }} aria-label="Monster stats">
+        <Table sx={{ width: "100%" }} aria-label="Monster stats">
           <TableBody>
             {tableData.map((item, index) => (
               <TableRow key={item[0] + "/" + index}>

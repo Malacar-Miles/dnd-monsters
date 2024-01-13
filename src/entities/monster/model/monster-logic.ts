@@ -1,4 +1,4 @@
-import type { StatTableProps } from "shared/ui/stat-table";
+import type { StatTableData } from "shared/ui/stat-table";
 import type { MonsterExtendedData } from "./monster-data";
 
 export const convertMonsterDescription = (desc: any) =>
@@ -9,7 +9,7 @@ export const convertMonsterDescription = (desc: any) =>
     : null;
 
 export const generateStatTables = (data: MonsterExtendedData) => {
-  const attributeTableProps: StatTableProps = {
+  const attributeTableData: StatTableData = {
     tableHeader: "Attributes",
     tableData: [
       ["Strength", data.strength],
@@ -21,7 +21,7 @@ export const generateStatTables = (data: MonsterExtendedData) => {
     ],
   };
 
-  const otherStatsTableProps: StatTableProps = {
+  const otherStatsTableData: StatTableData = {
     tableHeader: "Misc. Stats",
     tableData: [
       ["Alignment", data.alignment],
@@ -33,5 +33,5 @@ export const generateStatTables = (data: MonsterExtendedData) => {
     ],
   };
 
-  return { attributeTableProps, otherStatsTableProps };
+  return { attributeTableData, otherStatsTableData };
 };
