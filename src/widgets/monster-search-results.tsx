@@ -1,26 +1,11 @@
-import { Typography, Skeleton } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import {
-  useGetAllMonsterNamesQuery,
-  MONSTER_ENTITY_TYPE,
-} from "entities/monster";
-import {
-  generateSearchResults,
-  SearchResultCard,
-  useReduxSearchHistoryActions,
-} from "features/search";
+import { Skeleton } from "@mui/material";
+import { useGetAllMonsterNamesQuery, monsterEntity } from "entities/monster";
+import { SearchResults } from "features/search";
 import { FavoriteButton } from "features/favorites";
 import ErrorPage from "shared/ui/error";
-import URL_PATHS from "app/url-paths";
-import { constructMonsterImageUrl } from "entities/monster";
+import { BigText } from "shared/ui/big-text";
 import { useSelector } from "react-redux";
 import { selectUserData } from "entities/user";
-
-const BigText = ({ children }: { children: React.ReactNode }) => (
-  <Typography fontSize="1.5rem" textAlign="center">
-    {children}
-  </Typography>
-);
 
 const ResultsSkeleton = () => (
   <>
@@ -36,22 +21,17 @@ const MonsterSearchResults = ({
   searchQuery: string | undefined;
 }) => {
   const { currentUserId } = useSelector(selectUserData);
-  const { addSearchHistoryItem } = useReduxSearchHistoryActions();
 
   const { error, isLoading, data } = useGetAllMonsterNamesQuery();
   const allMonsters = data?.results;
-  const searchResults =
-    allMonsters && searchQuery
-      ? generateSearchResults({
-          searchableData: allMonsters,
-          searchQuery,
-          fieldToSearchBy: "name",
-          indexField: "index",
-        })
-      : undefined;
 
-  if (currentUserId && searchQuery && searchResults)
-    addSearchHistoryItem(currentUserId, searchQuery, searchResults.length);
+  const createFavoriteButton = (monsterIndex: string) => (
+    <FavoriteButton
+      componentSize="small"
+      entityType={monsterEntity.entityType}
+      entityId={monsterIndex}
+    />
+  );
 
   return (
     <>
@@ -62,30 +42,15 @@ const MonsterSearchResults = ({
       ) : isLoading ? (
         <ResultsSkeleton />
       ) : (
-        allMonsters &&
-        searchResults && (
-          <>
-            <BigText>Results found: {searchResults.length}</BigText>
-            <Grid container spacing="1rem" justifyContent="space-evenly">
-              {searchResults.map((result) => (
-                <Grid key={result.index}>
-                  <SearchResultCard
-                    item={result}
-                    individualResultPageUrl={URL_PATHS.monsterRoot}
-                    getImageUrlFunction={constructMonsterImageUrl}
-                    fallbackImageUrl="\images\monster-fallback-image.png"
-                    extraAction={
-                      <FavoriteButton
-                        componentSize="small"
-                        entityType={MONSTER_ENTITY_TYPE}
-                        entityId={result.index}
-                      />
-                    }
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </>
+        allMonsters && (
+          <SearchResults
+            searchableEntity={monsterEntity}
+            searchQuery={searchQuery}
+            searchableData={allMonsters}
+            createExtraAction={createFavoriteButton}
+            currentUserId={currentUserId}
+            addToSearchHistory
+          />
         )
       )}
     </>

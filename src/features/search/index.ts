@@ -5,6 +5,8 @@ export {
 
 export { SearchResultCard } from "./ui/search-result-card";
 
+export { SearchResults } from "./ui/search-results";
+
 export { SearchBar } from "./ui/search-bar";
 
 export { SearchHistory } from "./ui/search-history";
@@ -12,5 +14,4 @@ export { SearchHistory } from "./ui/search-history";
 export {
   historyReducer,
   selectSearchHistory,
-  useReduxSearchHistoryActions,
 } from "./model/redux-slice-history";

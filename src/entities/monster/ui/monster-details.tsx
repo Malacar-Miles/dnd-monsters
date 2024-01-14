@@ -8,7 +8,7 @@ import {
   convertMonsterDescription,
   generateStatTables,
 } from "../model/monster-logic";
-import { MONSTER_ENTITY_TYPE } from "../model/monster-data";
+import { monsterEntity } from "../model/monster-data";
 import { Typography, Box, Stack, Paper, useMediaQuery } from "@mui/material";
 
 export const MonsterDetails = ({ monsterIndex }: { monsterIndex: string }) => {
@@ -37,6 +37,8 @@ export const MonsterDetails = ({ monsterIndex }: { monsterIndex: string }) => {
 
     const columnWidth = mobileScreen ? "100%" : "20rem";
 
+    const { entityType } = monsterEntity;
+
     const MainContent = () => (
       <Stack justifyContent="center" alignItems="center" maxWidth={columnWidth}>
         <Typography variant="h2" textAlign="center">
@@ -53,7 +55,7 @@ export const MonsterDetails = ({ monsterIndex }: { monsterIndex: string }) => {
         {monsterDescription && <Typography>{monsterDescription}</Typography>}
         <FavoriteButton
           componentSize="normal"
-          entityType={MONSTER_ENTITY_TYPE}
+          entityType={entityType}
           entityId={data.index}
         />
       </Stack>
