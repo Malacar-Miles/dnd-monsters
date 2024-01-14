@@ -3,6 +3,7 @@ import { AppBar, Typography, Stack, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectUserData, useReduxUserActions } from "entities/user";
 import URL_PATHS from "app/url-paths";
+import { ReactComponent as Logo } from "./logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -76,11 +77,16 @@ const Header = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="h3">
-            <Link to={URL_PATHS.root} style={noDecoration}>
-              DnD Monsters
-            </Link>
-          </Typography>
+          <Link to={URL_PATHS.root} style={noDecoration}>
+            <Typography
+              variant="h3"
+              fontSize="2rem"
+              sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <Logo style={{ width: "2.5rem", height: "2.5rem" }} /> DnD
+              Monsters
+            </Typography>
+          </Link>
 
           <Stack direction="row" gap="1rem" alignItems="center">
             <AccountManagementControls />
