@@ -5,3 +5,9 @@ export type SearchableEntity = {
   fallbackImageUrl: string;
   getImageUrlFunction?: GetImageUrlFunction;
 };
+
+export type EntityBasicData = {
+  index: string;
+  name: string;
+  url: string;
+};

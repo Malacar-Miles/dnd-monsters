@@ -10,13 +10,14 @@ const Header = () => {
   const navigateToSignUp = () => navigate(URL_PATHS.signUp);
   const navigateToSignIn = () => navigate(URL_PATHS.signIn);
   const navigateToHistory = () => navigate(URL_PATHS.history);
+  const navigateToFavorites = () => navigate(URL_PATHS.favorites);
 
   const noDecoration = {
     textDecoration: "inherit",
     color: "inherit",
   };
 
-  const AccountManagementControls = () => {
+  const NavigationControls = () => {
     const { currentUserId } = useSelector(selectUserData);
     const { signOutUser } = useReduxUserActions();
     if (currentUserId)
@@ -30,6 +31,14 @@ const Header = () => {
             onClick={navigateToHistory}
           >
             History
+          </Button>
+          <Button
+            color="inherit"
+            size="large"
+            variant="outlined"
+            onClick={navigateToFavorites}
+          >
+            Favorites
           </Button>
           <Button
             color="inherit"
@@ -89,7 +98,7 @@ const Header = () => {
           </Link>
 
           <Stack direction="row" gap="1rem" alignItems="center">
-            <AccountManagementControls />
+            <NavigationControls />
           </Stack>
         </Stack>
       </AppBar>

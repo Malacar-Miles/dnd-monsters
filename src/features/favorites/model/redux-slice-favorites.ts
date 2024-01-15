@@ -9,7 +9,7 @@ type FavoritesStorage = {
   [entityType: string]: entityId[];
 };
 
-type AllUsersFavorites = {
+export type AllUsersFavorites = {
   [userId: string]: FavoritesStorage;
 };
 

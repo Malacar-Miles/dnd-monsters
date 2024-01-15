@@ -1,4 +1,7 @@
-import type { SearchableEntity } from "shared/api/searchable-entity";
+import type {
+  SearchableEntity,
+  EntityBasicData,
+} from "shared/api/searchable-entity";
 
 /* The api service www.dnd5eapi.co provides images for some monsters. 
 I want to show these images (whenever they are available) on monster
@@ -22,12 +25,6 @@ export const monsterEntity: SearchableEntity = {
   getImageUrlFunction: constructMonsterImageUrl,
 };
 
-export type MonsterBasicData = {
-  index: string;
-  name: string;
-  url: string;
-};
-
 export type Attributes = {
   charisma?: number;
   constitution?: number;
@@ -36,6 +33,8 @@ export type Attributes = {
   strength?: number;
   wisdom?: number;
 };
+
+export type MonsterBasicData = EntityBasicData;
 
 export type MonsterExtendedData = MonsterBasicData &
   Attributes & {

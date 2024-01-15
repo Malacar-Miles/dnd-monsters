@@ -18,6 +18,7 @@ const URL_PATHS = {
   signUp: "/sign-up",
 
   history: "/history",
+  favorites: "/favorites",
 };
 
 Object.setPrototypeOf(URL_PATHS, null);

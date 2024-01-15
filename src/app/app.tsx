@@ -18,6 +18,7 @@ import SignInPage from "pages/sign-in";
 import SearchPage from "pages/search";
 import MonsterPage from "pages/monster";
 import HistoryPage from "pages/history";
+import FavoritesPage from "pages/favorites";
 
 function App() {
   useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
             <Route path={URL_PATHS.search} element={<SearchPage />} />
             <Route path={URL_PATHS.monster} element={<MonsterPage />} />
             <Route path={URL_PATHS.history} element={<HistoryPage />} />
+            <Route path={URL_PATHS.favorites} element={<FavoritesPage />} />
           </Routes>
         </Container>
       </Provider>

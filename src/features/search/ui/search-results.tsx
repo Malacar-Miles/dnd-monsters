@@ -5,8 +5,18 @@ import { useReduxSearchHistoryActions } from "../model/redux-slice-history";
 import URL_PATHS from "app/url-paths";
 import type { MonsterBasicData } from "entities/monster";
 import type { SearchableEntity } from "shared/api/searchable-entity";
+import ErrorPage from "shared/ui/error";
 import { useEffect } from "react";
 import { BigText } from "shared/ui/big-text";
+import { Skeleton } from "@mui/material";
+
+const ResultsSkeleton = () => (
+  <>
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" animation="wave" />
+    <Skeleton height="3rem" animation={false} />
+  </>
+);
 
 export const SearchResults = ({
   searchQuery,
@@ -16,6 +26,8 @@ export const SearchResults = ({
   currentUserId,
   addToSearchHistory,
   hideResultCount,
+  isError,
+  isLoading,
 }: {
   searchQuery: string;
   searchableData: MonsterBasicData[] | undefined;
@@ -24,6 +36,8 @@ export const SearchResults = ({
   currentUserId: string | null;
   addToSearchHistory?: boolean;
   hideResultCount?: boolean;
+  isError?: boolean;
+  isLoading?: boolean;
 }) => {
   const { addSearchHistoryItem } = useReduxSearchHistoryActions();
 
@@ -44,7 +58,11 @@ export const SearchResults = ({
 
   const { getImageUrlFunction, fallbackImageUrl } = searchableEntity;
 
-  return !searchResults ? null : (
+  return isError ? (
+    <ErrorPage />
+  ) : isLoading ? (
+    <ResultsSkeleton />
+  ) : !searchResults ? null : (
     <>
       {!hideResultCount && (
         <BigText>Results found: {searchResults.length}</BigText>

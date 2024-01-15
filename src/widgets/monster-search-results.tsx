@@ -1,19 +1,9 @@
-import { Skeleton } from "@mui/material";
 import { useGetAllMonsterNamesQuery, monsterEntity } from "entities/monster";
 import { SearchResults } from "features/search";
 import { FavoriteButton } from "features/favorites";
-import ErrorPage from "shared/ui/error";
 import { BigText } from "shared/ui/big-text";
 import { useSelector } from "react-redux";
 import { selectUserData } from "entities/user";
-
-const ResultsSkeleton = () => (
-  <>
-    <Skeleton height="3rem" />
-    <Skeleton height="3rem" animation="wave" />
-    <Skeleton height="3rem" animation={false} />
-  </>
-);
 
 const MonsterSearchResults = ({
   searchQuery,
@@ -22,7 +12,7 @@ const MonsterSearchResults = ({
 }) => {
   const { currentUserId } = useSelector(selectUserData);
 
-  const { error, isLoading, data } = useGetAllMonsterNamesQuery();
+  const { isError, isLoading, data } = useGetAllMonsterNamesQuery();
   const allMonsters = data?.results;
 
   const createFavoriteButton = (monsterIndex: string) => (
@@ -37,10 +27,6 @@ const MonsterSearchResults = ({
     <>
       {!searchQuery ? (
         <BigText>Please enter a search query</BigText>
-      ) : error ? (
-        <ErrorPage />
-      ) : isLoading ? (
-        <ResultsSkeleton />
       ) : (
         allMonsters && (
           <SearchResults
@@ -50,6 +36,8 @@ const MonsterSearchResults = ({
             createExtraAction={createFavoriteButton}
             currentUserId={currentUserId}
             addToSearchHistory
+            isError={isError}
+            isLoading={isLoading}
           />
         )
       )}
