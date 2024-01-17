@@ -32,6 +32,7 @@ export const SearchResultCard = ({
     : fallbackImageUrl;
 
   const [imageUrl, setImageUrl] = useState(cardImageUrl);
+  const [imageErrorTriggered, setImageErrorTriggered] = useState(false);
 
   const handleClick = generateNavigateFunction(
     item.index,
@@ -42,7 +43,9 @@ export const SearchResultCard = ({
   const handleImageError = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
+    if (imageErrorTriggered || !getImageUrlFunction) return;
     event.stopPropagation();
+    setImageErrorTriggered(true);
     setImageUrl(fallbackImageUrl);
   };
 

@@ -1,3 +1,5 @@
+export { UserAvatar } from "./ui/user-avatar";
+
 export {
   selectUserData,
   useReduxUserActions,

@@ -1,78 +1,47 @@
-import { useNavigate, Link } from "react-router-dom";
-import { AppBar, Typography, Stack, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { AppBar, Typography, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectUserData, useReduxUserActions } from "entities/user";
+import { selectUserData, UserAvatar } from "entities/user";
 import URL_PATHS from "app/url-paths";
+import { NavMenu, type NavMenuItem } from "./nav-menu";
 import { ReactComponent as Logo } from "./logo.svg";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+const noDecoration = {
+  textDecoration: "inherit",
+  color: "inherit",
+};
+
+const mobileBreakpoint = 880;
+const tinyScreenBreakpoint = 420;
+
+const navItemsForSignedOutUser: NavMenuItem[] = [
+  { title: "Search", path: URL_PATHS.searchRoot },
+  {
+    title: "Sign Up",
+    path: URL_PATHS.signUp,
+  },
+  {
+    title: "Sign In",
+    path: URL_PATHS.signIn,
+  },
+];
+
+const navItemsForSignedInUser: NavMenuItem[] = [
+  { title: "Search", path: URL_PATHS.searchRoot },
+  {
+    title: "History",
+    path: URL_PATHS.history,
+  },
+  {
+    title: "Favorites",
+    path: URL_PATHS.favorites,
+  },
+];
 
 const Header = () => {
-  const navigate = useNavigate();
-  const navigateToSignUp = () => navigate(URL_PATHS.signUp);
-  const navigateToSignIn = () => navigate(URL_PATHS.signIn);
-  const navigateToHistory = () => navigate(URL_PATHS.history);
-  const navigateToFavorites = () => navigate(URL_PATHS.favorites);
-
-  const noDecoration = {
-    textDecoration: "inherit",
-    color: "inherit",
-  };
-
-  const NavigationControls = () => {
-    const { currentUserId } = useSelector(selectUserData);
-    const { signOutUser } = useReduxUserActions();
-    if (currentUserId)
-      return (
-        <>
-          {" "}
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            onClick={navigateToHistory}
-          >
-            History
-          </Button>
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            onClick={navigateToFavorites}
-          >
-            Favorites
-          </Button>
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            onClick={signOutUser}
-          >
-            Sign Out
-          </Button>
-        </>
-      );
-    else
-      return (
-        <>
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            onClick={navigateToSignUp}
-          >
-            Sign Up
-          </Button>
-
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            onClick={navigateToSignIn}
-          >
-            Sign In
-          </Button>
-        </>
-      );
-  };
+  const { currentUserId } = useSelector(selectUserData);
+  const tinyScreen = useMediaQuery(`(max-width:${tinyScreenBreakpoint}px)`);
 
   return (
     <>
@@ -92,13 +61,26 @@ const Header = () => {
               fontSize="2rem"
               sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
             >
-              <Logo style={{ width: "2.5rem", height: "2.5rem" }} /> DnD
-              Monsters
+              <Logo style={{ width: "2.5rem", height: "2.5rem" }} />{" "}
+              {!tinyScreen && "DnD Monsters"}
             </Typography>
           </Link>
 
           <Stack direction="row" gap="1rem" alignItems="center">
-            <NavigationControls />
+            {currentUserId ? (
+              <>
+                <NavMenu
+                  mobileBreakpoint={mobileBreakpoint}
+                  navMenuItems={navItemsForSignedInUser}
+                />
+                <UserAvatar />
+              </>
+            ) : (
+              <NavMenu
+                mobileBreakpoint={mobileBreakpoint}
+                navMenuItems={navItemsForSignedOutUser}
+              />
+            )}
           </Stack>
         </Stack>
       </AppBar>

@@ -9,6 +9,7 @@ import {
 } from "features/favorites";
 import { BigText } from "shared/ui/big-text";
 import { QUERY_THAT_RETURNS_ALL_ITEMS } from "features/search";
+import { Typography } from "@mui/material";
 
 export const MonsterFavorites = () => {
   const { currentUserId } = useSelector(selectUserData);
@@ -31,18 +32,25 @@ export const MonsterFavorites = () => {
     />
   );
 
-  return filteredMonsters?.length === 0 ? (
-    <BigText>You don't have any favorites</BigText>
-  ) : (
-    <SearchResults
-      searchQuery={QUERY_THAT_RETURNS_ALL_ITEMS}
-      searchableData={filteredMonsters}
-      searchableEntity={monsterEntity}
-      currentUserId={currentUserId}
-      hideResultCount
-      isError={isError}
-      isLoading={isLoading}
-      createExtraAction={createFavoriteButton}
-    />
+  return (
+    <>
+      <Typography variant="h2" textAlign="center">
+        Favorites
+      </Typography>
+      {!filteredMonsters || filteredMonsters?.length === 0 ? (
+        <BigText>You don't have any favorites</BigText>
+      ) : (
+        <SearchResults
+          searchQuery={QUERY_THAT_RETURNS_ALL_ITEMS}
+          searchableData={filteredMonsters}
+          searchableEntity={monsterEntity}
+          currentUserId={currentUserId}
+          hideResultCount
+          isError={isError}
+          isLoading={isLoading}
+          createExtraAction={createFavoriteButton}
+        />
+      )}
+    </>
   );
 };

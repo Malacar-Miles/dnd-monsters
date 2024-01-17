@@ -6,6 +6,7 @@ import URL_PATHS from "app/url-paths";
 import type { HistoryDataEntry } from "../model/redux-slice-history";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { BigText } from "shared/ui/big-text";
 
 dayjs.extend(relativeTime);
 
@@ -27,7 +28,7 @@ export const SearchHistory = ({ currentUser }: { currentUser: string }) => {
       timestamp
     )}`;
     return (
-      <Typography fontSize="2rem">
+      <Typography fontSize="2rem" textAlign={"center"}>
         <Link to={linkPath}>{searchQuery}</Link>
         {textAfterLink}
       </Typography>
@@ -46,9 +47,7 @@ export const SearchHistory = ({ currentUser }: { currentUser: string }) => {
       </Typography>
 
       {!searchHistory || searchHistory.length === 0 ? (
-        <Typography fontSize="1.5rem" textAlign="center">
-          Your search history is empty.
-        </Typography>
+        <BigText>Your search history is empty.</BigText>
       ) : (
         reverseSearchHistory(searchHistory).map((searchHistoryItem, index) => (
           <SearchHistoryEntry
