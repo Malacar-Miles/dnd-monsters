@@ -12,7 +12,7 @@ const noDecoration = {
   color: "inherit",
 };
 
-const mobileBreakpoint = 880;
+const mobileBreakpoint = 900;
 const tinyScreenBreakpoint = 420;
 
 const navItemsForSignedOutUser: NavMenuItem[] = [

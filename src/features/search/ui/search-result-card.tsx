@@ -11,6 +11,9 @@ import {
 } from "../model/search-logic";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+const tinyScreenBreakpoint = 420;
 
 export const SearchResultCard = ({
   item,
@@ -26,6 +29,9 @@ export const SearchResultCard = ({
   extraAction?: React.ReactNode;
 }) => {
   const navigate = useNavigate();
+  const tinyScreen = useMediaQuery(`(max-width:${tinyScreenBreakpoint}px)`);
+
+  const headerStyle = tinyScreen ? { padding: "0.5rem" } : null;
 
   const cardImageUrl = getImageUrlFunction
     ? getImageUrlFunction(item.index)
@@ -49,31 +55,33 @@ export const SearchResultCard = ({
     setImageUrl(fallbackImageUrl);
   };
 
-  const truncateText = {
-    width: "10rem",
-    whiteSpace: "nowrap",
+  const truncateHeaderText = {
+    display: "-webkit-box",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: "1",
   };
 
   return (
-    <Card sx={{ width: "12rem" }}>
+    <Card sx={{ width: "100%" }}>
       <CardHeader
         title={item.displayText}
-        titleTypographyProps={{ sx: truncateText }}
+        titleTypographyProps={{ sx: truncateHeaderText }}
+        sx={headerStyle}
       />
       {getImageUrlFunction && (
         <CardMedia
           component="img"
-          height="194"
           image={imageUrl}
           alt={item.displayText}
           onError={handleImageError}
+          sx={{ aspectRatio: "4.2/5" }}
         />
       )}
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button size="small" onClick={handleClick}>
-          View Page
+          {tinyScreen ? "View" : "View Page"}
         </Button>
         {extraAction}
       </CardActions>

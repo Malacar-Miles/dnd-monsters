@@ -67,9 +67,9 @@ export const SearchResults = ({
       {!hideResultCount && (
         <BigText>Results found: {searchResults.length}</BigText>
       )}
-      <Grid container spacing="1rem" justifyContent="space-evenly">
+      <Grid container spacing="1rem">
         {searchResults.map((result) => (
-          <Grid key={result.index}>
+          <Grid key={result.index} xs={6} sm={4} md={3} lg={2}>
             <SearchResultCard
               item={result}
               individualResultPageUrl={URL_PATHS.monsterRoot}
