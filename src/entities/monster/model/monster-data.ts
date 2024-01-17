@@ -21,7 +21,7 @@ export const constructMonsterImageUrl = (monsterIndex: string) =>
 
 export const monsterEntity: SearchableEntity = {
   entityType: "monster",
-  fallbackImageUrl: "/images/monster-fallback-image2.png",
+  fallbackImageUrl: "/images/monster-fallback-image.png",
   getImageUrlFunction: constructMonsterImageUrl,
 };
 

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUserData, UserAvatar } from "entities/user";
 import URL_PATHS from "app/url-paths";
 import { NavMenu, type NavMenuItem } from "./nav-menu";
-import { ReactComponent as Logo } from "./logo.svg";
+import { ReactComponent as Logo } from "shared/ui/logo.svg";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const noDecoration = {
@@ -57,12 +57,12 @@ const Header = () => {
         >
           <Link to={URL_PATHS.root} style={noDecoration}>
             <Typography
-              variant="h3"
+              variant="h1"
               fontSize="2rem"
               sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
             >
               <Logo style={{ width: "2.5rem", height: "2.5rem" }} />{" "}
-              {!tinyScreen && "DnD Monsters"}
+              {!tinyScreen && "D&D Monsters"}
             </Typography>
           </Link>
 

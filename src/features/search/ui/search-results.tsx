@@ -73,7 +73,11 @@ export const SearchResults = ({
             <SearchResultCard
               item={result}
               individualResultPageUrl={URL_PATHS.monsterRoot}
-              getImageUrlFunction={getImageUrlFunction}
+              imageUrl={
+                getImageUrlFunction
+                  ? getImageUrlFunction(result.index)
+                  : undefined
+              }
               fallbackImageUrl={fallbackImageUrl}
               extraAction={
                 createExtraAction ? createExtraAction(result.index) : null

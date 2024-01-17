@@ -18,13 +18,13 @@ const tinyScreenBreakpoint = 420;
 export const SearchResultCard = ({
   item,
   individualResultPageUrl,
-  getImageUrlFunction,
+  imageUrl,
   fallbackImageUrl,
   extraAction,
 }: {
   item: SearchResult;
   individualResultPageUrl: string;
-  getImageUrlFunction?: (index: string) => string;
+  imageUrl?: string;
   fallbackImageUrl: string;
   extraAction?: React.ReactNode;
 }) => {
@@ -33,11 +33,9 @@ export const SearchResultCard = ({
 
   const headerStyle = tinyScreen ? { padding: "0.5rem" } : null;
 
-  const cardImageUrl = getImageUrlFunction
-    ? getImageUrlFunction(item.index)
-    : fallbackImageUrl;
+  const cardImageUrl = imageUrl ? imageUrl : fallbackImageUrl;
 
-  const [imageUrl, setImageUrl] = useState(cardImageUrl);
+  const [imageUrlState, setImageUrlState] = useState(cardImageUrl);
   const [imageErrorTriggered, setImageErrorTriggered] = useState(false);
 
   const handleClick = generateNavigateFunction(
@@ -49,10 +47,10 @@ export const SearchResultCard = ({
   const handleImageError = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
-    if (imageErrorTriggered || !getImageUrlFunction) return;
+    if (imageErrorTriggered || !imageUrl) return;
     event.stopPropagation();
     setImageErrorTriggered(true);
-    setImageUrl(fallbackImageUrl);
+    setImageUrlState(fallbackImageUrl);
   };
 
   const truncateHeaderText = {
@@ -70,10 +68,10 @@ export const SearchResultCard = ({
         titleTypographyProps={{ sx: truncateHeaderText }}
         sx={headerStyle}
       />
-      {getImageUrlFunction && (
+      {imageUrl && (
         <CardMedia
           component="img"
-          image={imageUrl}
+          image={imageUrlState}
           alt={item.displayText}
           onError={handleImageError}
           sx={{ aspectRatio: "4.2/5" }}
