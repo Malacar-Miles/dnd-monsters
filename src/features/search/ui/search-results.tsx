@@ -56,7 +56,7 @@ export const SearchResults = ({
     // eslint-disable-next-line
   }, [currentUserId, searchResults]);
 
-  const { getImageUrlFunction, fallbackImageUrl } = searchableEntity;
+  const { getImageUrlFunction } = searchableEntity;
 
   return isError ? (
     <ErrorPage />
@@ -78,7 +78,6 @@ export const SearchResults = ({
                   ? getImageUrlFunction(result.index)
                   : undefined
               }
-              fallbackImageUrl={fallbackImageUrl}
               extraAction={
                 createExtraAction ? createExtraAction(result.index) : null
               }

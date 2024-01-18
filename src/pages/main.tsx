@@ -54,8 +54,8 @@ const MainPage = () => {
                 free API
               </Link>
               . Currently this API provides images for only a small subset of
-              monsters, so I'm showing a placeholer image in cases where a
-              proper image is not available.
+              monsters, so I'm showing a logo in cases where a proper image is
+              not available.
             </Typography>
             <Typography>
               This is a practice project. My main purpose was to learn the

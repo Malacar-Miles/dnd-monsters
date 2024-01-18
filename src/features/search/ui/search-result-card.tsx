@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { ReactComponent as Logo } from "shared/ui/logo.svg";
 
 const tinyScreenBreakpoint = 420;
 
@@ -19,13 +20,11 @@ export const SearchResultCard = ({
   item,
   individualResultPageUrl,
   imageUrl,
-  fallbackImageUrl,
   extraAction,
 }: {
   item: SearchResult;
   individualResultPageUrl: string;
   imageUrl?: string;
-  fallbackImageUrl: string;
   extraAction?: React.ReactNode;
 }) => {
   const navigate = useNavigate();
@@ -33,9 +32,6 @@ export const SearchResultCard = ({
 
   const headerStyle = tinyScreen ? { padding: "0.5rem" } : null;
 
-  const cardImageUrl = imageUrl ? imageUrl : fallbackImageUrl;
-
-  const [imageUrlState, setImageUrlState] = useState(cardImageUrl);
   const [imageErrorTriggered, setImageErrorTriggered] = useState(false);
 
   const handleClick = generateNavigateFunction(
@@ -47,10 +43,9 @@ export const SearchResultCard = ({
   const handleImageError = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
-    if (imageErrorTriggered || !imageUrl) return;
+    if (imageErrorTriggered) return;
     event.stopPropagation();
     setImageErrorTriggered(true);
-    setImageUrlState(fallbackImageUrl);
   };
 
   const truncateHeaderText = {
@@ -68,14 +63,18 @@ export const SearchResultCard = ({
         titleTypographyProps={{ sx: truncateHeaderText }}
         sx={headerStyle}
       />
-      {imageUrl && (
+      {imageUrl && !imageErrorTriggered ? (
         <CardMedia
           component="img"
-          image={imageUrlState}
+          image={imageUrl}
           alt={item.displayText}
           onError={handleImageError}
           sx={{ aspectRatio: "4.2/5" }}
         />
+      ) : (
+        <CardMedia sx={{ padding: "1rem", aspectRatio: "4.3/5" }}>
+          <Logo />
+        </CardMedia>
       )}
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button size="small" onClick={handleClick}>
