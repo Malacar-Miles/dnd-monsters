@@ -4,6 +4,8 @@ import {
   CardMedia,
   CardActions,
   Button,
+  Box,
+  Skeleton,
 } from "@mui/material";
 import {
   type SearchResult,
@@ -30,9 +32,10 @@ export const SearchResultCard = ({
   const navigate = useNavigate();
   const tinyScreen = useMediaQuery(`(max-width:${tinyScreenBreakpoint}px)`);
 
-  const headerStyle = tinyScreen ? { padding: "0.5rem" } : null;
-
   const [imageErrorTriggered, setImageErrorTriggered] = useState(false);
+  const [imageIsLoading, setImageIsLoading] = useState(true);
+
+  const headerStyle = tinyScreen ? { padding: "0.5rem" } : null;
 
   const handleClick = generateNavigateFunction(
     item.index,
@@ -46,6 +49,11 @@ export const SearchResultCard = ({
     if (imageErrorTriggered) return;
     event.stopPropagation();
     setImageErrorTriggered(true);
+    setImageIsLoading(false);
+  };
+
+  const handleImageLoad = () => {
+    setImageIsLoading(false);
   };
 
   const truncateHeaderText = {
@@ -63,19 +71,42 @@ export const SearchResultCard = ({
         titleTypographyProps={{ sx: truncateHeaderText }}
         sx={headerStyle}
       />
-      {imageUrl && !imageErrorTriggered ? (
-        <CardMedia
-          component="img"
-          image={imageUrl}
-          alt={item.displayText}
-          onError={handleImageError}
-          sx={{ aspectRatio: "4.2/5" }}
-        />
-      ) : (
-        <CardMedia sx={{ padding: "1rem", aspectRatio: "4.3/5" }}>
-          <Logo />
-        </CardMedia>
-      )}
+      <Box
+        sx={{
+          width: "100%",
+          aspectRatio: "4.2/5",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {imageIsLoading && (
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            sx={{
+              position: "absolute",
+              zIndex: "1",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        )}
+        {imageUrl && !imageErrorTriggered ? (
+          <CardMedia
+            component="img"
+            image={imageUrl}
+            alt={item.displayText}
+            loading="lazy"
+            onError={handleImageError}
+            onLoad={handleImageLoad}
+            sx={{ height: "100%", width: "100%" }}
+          />
+        ) : (
+          <CardMedia sx={{ padding: "1rem", height: "100%", width: "100%" }}>
+            <Logo />
+          </CardMedia>
+        )}
+      </Box>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button size="small" onClick={handleClick}>
           {tinyScreen ? "View" : "View Page"}
